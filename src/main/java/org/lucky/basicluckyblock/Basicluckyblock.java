@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.lucky.basicluckyblock.blockitems.BazookaItem;
 import org.lucky.basicluckyblock.blockitems.NukeItem;
 
 public final class Basicluckyblock extends JavaPlugin {
@@ -15,6 +16,7 @@ public final class Basicluckyblock extends JavaPlugin {
 
         // Register NukeItem event listener
         Bukkit.getPluginManager().registerEvents(new NukeItem(this), this);
+        Bukkit.getPluginManager().registerEvents(new BazookaItem(this),this);
     }
 
     @Override
@@ -36,6 +38,18 @@ public final class Basicluckyblock extends JavaPlugin {
                 return true;
             }
         }
+        if (command.getName().equalsIgnoreCase("bazooka")) {
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+                player.getInventory().addItem(BazookaItem.createBazookaItem());
+                player.sendMessage("§aYou have received the Bazooka!");
+                return true;
+            } else {
+                sender.sendMessage("§cThis command can only be used by a player!");
+                return true;
+            }
+        }
         return false;
     }
 }
+

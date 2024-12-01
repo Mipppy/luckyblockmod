@@ -7,10 +7,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockIterator;
+
+import java.util.Arrays;
 
 public class NukeItem implements Listener {
 
@@ -25,7 +28,8 @@ public class NukeItem implements Listener {
         ItemMeta meta = nuke.getItemMeta();
         if (meta != null) {
             meta.setDisplayName("§cNuke Stick");
-            meta.setLore(java.util.Arrays.asList("§7Use this to summon a barrage of TNT!"));
+            meta.setLore(Arrays.asList("§7Use this to summon a barrage of TNT!"));
+            meta.setMaxStackSize(1);
         }
         nuke.setItemMeta(meta);
         return nuke;
@@ -41,11 +45,12 @@ public class NukeItem implements Listener {
         if (meta == null || !meta.hasDisplayName() || !meta.getDisplayName().equals("§cNuke Stick")) return;
 
         Location targetBlock = getTargetBlock(player, 250);
-        if (targetBlock == null) {
+        if (targetBlock == null || targetBlock.getBlockY() == 320) {
             player.sendMessage("§cYou are not looking at a block!");
             return;
         }
 
+        player.getInventory().setItemInMainHand(null);
         spawnTNTBarrage(targetBlock, player.getWorld());
         showNukeParticleEffect(targetBlock, player.getWorld());
         player.sendMessage("§eNuke incoming at " + targetBlock.getBlockX() + ", " + targetBlock.getBlockY() + ", " + targetBlock.getBlockZ() + "!");

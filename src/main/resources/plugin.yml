@@ -2,6 +2,11 @@ name: basicluckyblock
 version: '1.0-SNAPSHOT'
 main: org.lucky.basicluckyblock.Basicluckyblock
 api-version: '1.21'
+author: Mippy
 commands:
   nukestick:
     description: Give the player a Nuke Stick
+    usage: /<command>
+  bazooka:
+    description: Gives the player a Bazooka
+    usage: /<command>

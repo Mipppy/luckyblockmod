@@ -1,0 +1,7 @@
+name: basicluckyblock
+version: '1.0-SNAPSHOT'
+main: org.lucky.basicluckyblock.Basicluckyblock
+api-version: '1.21'
+commands:
+  nukestick:
+    description: Give the player a Nuke Stick

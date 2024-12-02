@@ -50,7 +50,7 @@ public class BazookaItem implements Listener {
 
         Fireball fireball = player.getWorld().spawn(player.getEyeLocation().add(player.getLocation().getDirection().multiply(1.5)), Fireball.class);
         fireball.setShooter(player);
-        fireball.setYield(8.0f);
+        fireball.setYield(3.0f);
         fireball.setIsIncendiary(false);
         player.sendMessage("§eYou fired the bazooka!");
         new BukkitRunnable() {
@@ -63,7 +63,7 @@ public class BazookaItem implements Listener {
                     cancel();
                     return;
                 }
-                double radiuz = 1.5D;
+                double radiuz = 3D;
                 distanceTraveled = initialLocation.distance(fireball.getLocation());
 
                 if (distanceTraveled >= 150) {
@@ -72,8 +72,8 @@ public class BazookaItem implements Listener {
                     cancel();
                     return;
                 }
-                radiuz -= 0.25D;
-                radiuz = Math.max(radiuz,0.25);
+                radiuz -= 0.5D;
+                radiuz = Math.max(radiuz,0.1);
                 rotationAngle += Math.PI / 16;
                 HelperFunction.spawnParticleCircle(fireball.getLocation(), radiuz, Particle.FLAME, 20, rotationAngle, fireball.getVelocity());
             }
@@ -83,7 +83,7 @@ public class BazookaItem implements Listener {
     @EventHandler
     public void onFireballExplosion(EntityExplodeEvent event) {
         if (!(event.getEntity() instanceof Fireball)) return;
-        HelperFunction.EnhancedExplosion(event, 3,50);
+        HelperFunction.EnhancedExplosion(event, 10,50);
     }
 
 }

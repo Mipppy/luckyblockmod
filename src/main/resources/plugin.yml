@@ -10,3 +10,15 @@ commands:
   bazooka:
     description: Gives the player a Bazooka
     usage: /<command>
+  suicidechestplate:
+    description: Gives the player a suicide chestplate
+    usage: /<command>
+  aagun:
+    description: Gives the player a AA Gun
+    usage: /<command>
+  lightningsword:
+    description: Gives the player a Lightning Sword
+    usage: /<command>
+  bridgeegg:
+    description: Gives the player a Bridge Egg
+    usage: /<command>

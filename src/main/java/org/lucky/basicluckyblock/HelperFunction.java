@@ -6,7 +6,11 @@ import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Fireball;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 import java.util.Random;
@@ -71,5 +75,23 @@ public class HelperFunction {
             world.spawnParticle(particle, particleLocation, 1, 0, 0, 0, 0);
         }
     }
+    public static boolean damageItem(ItemStack item, int damageAmount) {
+        if (item.getType() != Material.AIR) {
+            ItemMeta meta = item.getItemMeta();
+            if (meta instanceof Damageable damageableMeta) {
+                int currentDamage = damageableMeta.getDamage();
+                int newDamage = currentDamage + damageAmount;
 
+                if (newDamage >= item.getType().getMaxDurability()) {
+                    item.setAmount(0);
+                    return true;
+                } else {
+                    damageableMeta.setDamage(newDamage);
+                    item.setItemMeta(meta);
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
 }
